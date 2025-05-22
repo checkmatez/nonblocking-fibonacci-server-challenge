@@ -32,7 +32,7 @@ it('returns 200 for consequent requests', async () => {
   expect(await res2.text()).toBe('Fibonacci number at position 10 is 55\n');
 });
 
-it.only('one user should not block others', async () => {
+it('one user should not block others', async () => {
   const ac = new AbortController();
   fetch('http://localhost:3000/100', { signal: ac.signal }).then(throwIfNotOk);
 
