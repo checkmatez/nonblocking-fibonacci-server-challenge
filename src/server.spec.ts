@@ -34,7 +34,13 @@ it('returns 200 for consequent requests', async () => {
 
 it.only('one user should not block others', async () => {
   const ac = new AbortController();
-  fetch('http://localhost:3000/100', { signal: ac.signal }).then(throwIfNotOk);
+  fetch('http://localhost:3000/100', { signal: ac.signal })
+    .then(throwIfNotOk)
+    .catch(err => {
+      if (!(err instanceof DOMException && err.name === 'AbortError')) {
+        throw err;
+      }
+    });
 
   await new Promise(resolve => setTimeout(resolve, 100));
 
