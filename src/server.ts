@@ -3,6 +3,8 @@ import { fibonacci } from './fibonacci';
 
 const PORT = 3000;
 
+// GET /12  -> 144
+
 export const server = createServer((req, res) => {
   const match = req.url?.match(/^\/(\d+)$/);
   const position = match ? parseInt(match[1]) : NaN;
@@ -12,9 +14,8 @@ export const server = createServer((req, res) => {
       .writeHead(400, { 'Content-Type': 'text/plain' })
       .end('Invalid Fibonacci position');
   }
-  console.log('🚀 ~ server ~ position:', position);
+
   const result = fibonacci(position);
-  console.log('🚀 ~ server ~ result:', result);
 
   res
     .writeHead(200, { 'Content-Type': 'text/plain' })
