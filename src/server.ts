@@ -5,7 +5,7 @@ const PORT = 3000;
 
 // GET /12  -> 144
 
-export const server = createServer((req, res) => {
+export const server = createServer(async (req, res) => {
   const match = req.url?.match(/^\/(\d+)$/);
   const position = match ? parseInt(match[1]) : NaN;
 
@@ -15,7 +15,7 @@ export const server = createServer((req, res) => {
       .end('Invalid Fibonacci position');
   }
 
-  const result = fibonacci(position);
+  const result = await fibonacci(position);
 
   res
     .writeHead(200, { 'Content-Type': 'text/plain' })
